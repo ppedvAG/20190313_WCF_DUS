@@ -6,6 +6,12 @@
         xmlns:local="clr-namespace:Schnattern.Client"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="600">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="4,0"/>
+            <Setter Property="Padding" Value="12,4"/>
+        </Style>
+    </Window.Resources>
     <DockPanel>
         <Grid DockPanel.Dock="Top" Margin="12">
             <Grid.ColumnDefinitions>
@@ -16,8 +22,8 @@
             </Grid.ColumnDefinitions>
             <Label>Name:</Label>
             <TextBox Grid.Column="1" Name="usernameTb"/>
-            <Button Grid.Column="2">Login</Button>
-            <Button Grid.Column="3">Logout</Button>
+            <Button Click="Login" Grid.Column="2" Name="loginBtn">Login</Button>
+            <Button Grid.Column="3" Name="logoutBtn">Logout</Button>
         </Grid>
         <Grid DockPanel.Dock="Bottom" Margin="12">
             <Grid.ColumnDefinitions>
@@ -26,8 +32,8 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             <TextBox Name="textTb"/>
-            <Button Grid.Column="1">Send Text</Button>
-            <Button Grid.Column="2">🤓</Button>
+            <Button Grid.Column="1" Name="sendTextBtn">Send Text</Button>
+            <Button Grid.Column="2" Name="sendImageBtn">🤓</Button>
         </Grid>
 
         <ListBox DockPanel.Dock="Right" Name="usersLb" Width="160"/>

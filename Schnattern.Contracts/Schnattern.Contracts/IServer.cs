@@ -3,7 +3,7 @@ using System.ServiceModel;
 
 namespace Schnattern.Contracts
 {
-    [ServiceContract(CallbackContract =typeof(IClient))]
+    [ServiceContract(CallbackContract = typeof(IClient))]
     public interface IServer
     {
         [OperationContract(IsOneWay = true)]
