@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
@@ -43,9 +44,24 @@ namespace Schnattern.Client
         private void Login(object sender, RoutedEventArgs e)
         {
             var tcp = new NetTcpBinding();
-            tcp.MaxReceivedMessageSize = int.MaxValue;
+            tcp.Security.Mode = SecurityMode.TransportWithMessageCredential;
+            //tcp.Security.Transport.ClientCredentialType = TcpClientCredentialType.Windows;
+            tcp.Security.Transport.ClientCredentialType = TcpClientCredentialType.Certificate;
 
-            var cf = new DuplexChannelFactory<IServer>(this, tcp, new EndpointAddress("net.tcp://localhost:1"));
+
+
+            tcp.MaxReceivedMessageSize = int.MaxValue;
+            var adr = "net.tcp://192.168.178.156:1";
+
+            EndpointIdentity identity = EndpointIdentity.CreateDnsIdentity("RootCA");
+            EndpointAddress address = new EndpointAddress(new Uri(adr), identity);
+            var cf = new DuplexChannelFactory<IServer>(this, tcp, address);
+            //cf.Credentials.Windows.ClientCredential.UserName = "Fred";
+            //cf.Credentials.Windows.ClientCredential.Password = "123456";
+            cf.Credentials.ClientCertificate.SetCertificate(StoreLocation.CurrentUser, StoreName.My,
+                X509FindType.FindByThumbprint, "69ff17bd74b7e71da25dd06e2952276a4b956a36");
+
+            cf.Credentials.ServiceCertificate.Authentication.CertificateValidationMode = System.ServiceModel.Security.X509CertificateValidationMode.None;
 
             server = cf.CreateChannel();
             server.Login(usernameTb.Text);
