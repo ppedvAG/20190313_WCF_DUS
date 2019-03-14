@@ -5,6 +5,10 @@ VisualStudioVersion = 15.0.28307.489
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WCFSelfHost", "WCFSelfHost\WCFSelfHost.csproj", "{078953BA-15DF-449B-BF47-7997E4CE91CC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WCFSelfHost.Contracts", "WCFSelfHost.Contracts\WCFSelfHost.Contracts.csproj", "{FE119484-EB10-4194-803A-992CFCB2E8A5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WCFSelfHost.Client", "WCFSelfHost.Client\WCFSelfHost.Client.csproj", "{942D345B-EED2-46D4-8F10-974ACB5F3F01}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{078953BA-15DF-449B-BF47-7997E4CE91CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{078953BA-15DF-449B-BF47-7997E4CE91CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{078953BA-15DF-449B-BF47-7997E4CE91CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE119484-EB10-4194-803A-992CFCB2E8A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE119484-EB10-4194-803A-992CFCB2E8A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE119484-EB10-4194-803A-992CFCB2E8A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE119484-EB10-4194-803A-992CFCB2E8A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{942D345B-EED2-46D4-8F10-974ACB5F3F01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{942D345B-EED2-46D4-8F10-974ACB5F3F01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{942D345B-EED2-46D4-8F10-974ACB5F3F01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{942D345B-EED2-46D4-8F10-974ACB5F3F01}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
