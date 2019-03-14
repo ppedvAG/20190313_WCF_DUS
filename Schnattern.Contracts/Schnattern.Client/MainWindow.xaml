@@ -23,7 +23,7 @@
             <Label>Name:</Label>
             <TextBox Grid.Column="1" Name="usernameTb"/>
             <Button Click="Login" Grid.Column="2" Name="loginBtn">Login</Button>
-            <Button Grid.Column="3" Name="logoutBtn">Logout</Button>
+            <Button Click="Logout" Grid.Column="3" Name="logoutBtn">Logout</Button>
         </Grid>
         <Grid DockPanel.Dock="Bottom" Margin="12">
             <Grid.ColumnDefinitions>
@@ -32,8 +32,8 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             <TextBox Name="textTb"/>
-            <Button Grid.Column="1" Name="sendTextBtn">Send Text</Button>
-            <Button Grid.Column="2" Name="sendImageBtn">🤓</Button>
+            <Button Click="SendText" Grid.Column="1" Name="sendTextBtn">Send Text</Button>
+            <Button Click="SendImage" Grid.Column="2" Name="sendImageBtn">🤓</Button>
         </Grid>
 
         <ListBox DockPanel.Dock="Right" Name="usersLb" Width="160"/>

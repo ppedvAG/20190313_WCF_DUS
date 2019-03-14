@@ -17,6 +17,8 @@ namespace Schnattern.Server
             using (var host = new ServiceHost(typeof(SchnatternServer), new Uri("net.tcp://localhost:1")))
             {
                 var tcp = new NetTcpBinding();
+                tcp.MaxReceivedMessageSize = int.MaxValue;
+
                 host.AddServiceEndpoint(typeof(IServer), tcp, "");
 
                 host.Open();

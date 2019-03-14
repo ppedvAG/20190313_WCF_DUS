@@ -1,4 +1,5 @@
-﻿using Schnattern.Contracts;
+﻿using Microsoft.Win32;
+using Schnattern.Contracts;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -26,7 +27,15 @@ namespace Schnattern.Client
         public MainWindow()
         {
             InitializeComponent();
-            usernameTb.Text = "Fred";
+            usernameTb.Text = $"Fred_{Guid.NewGuid().ToString().Substring(0, 4)}";
+
+            textTb.KeyUp += (s, e) =>
+            {
+                if (e.Key == Key.Enter)
+                    SendText(s, null);
+            };
+            Closing += (s, e) => Logout(this, null);
+
             LoginFailed("");
         }
 
@@ -34,6 +43,8 @@ namespace Schnattern.Client
         private void Login(object sender, RoutedEventArgs e)
         {
             var tcp = new NetTcpBinding();
+            tcp.MaxReceivedMessageSize = int.MaxValue;
+
             var cf = new DuplexChannelFactory<IServer>(this, tcp, new EndpointAddress("net.tcp://localhost:1"));
 
             server = cf.CreateChannel();
@@ -47,7 +58,21 @@ namespace Schnattern.Client
 
         public void ShowImage(Stream image)
         {
-            throw new NotImplementedException();
+            var ms = new MemoryStream();
+            image.CopyTo(ms);
+            ms.Position = 0;
+
+            var vb = new Viewbox();
+
+            var img = new Image();
+            img.BeginInit();
+            img.Source = BitmapFrame.Create(ms, BitmapCreateOptions.None, BitmapCacheOption.OnLoad);
+            img.Stretch = Stretch.None;
+            img.EndInit();
+            vb.Child = img;
+            chatLb.Items.Add(vb);
+
+
         }
 
         public void ShowUsers(IEnumerable<string> users)
@@ -74,6 +99,35 @@ namespace Schnattern.Client
             logoutBtn.IsEnabled = !true;
             sendImageBtn.IsEnabled = !true;
             sendTextBtn.IsEnabled = !true;
+            usersLb.ItemsSource = null;
+        }
+
+        private void SendText(object sender, RoutedEventArgs e)
+        {
+            server?.SendText(textTb.Text);
+            textTb.Clear();
+        }
+
+        private void Logout(object sender, RoutedEventArgs e)
+        {
+            server?.Logout();
+            LoginFailed("");
+            server = null;
+        }
+
+        private void SendImage(object sender, RoutedEventArgs e)
+        {
+            var dlg = new OpenFileDialog()
+            {
+                Filter = "Katzenbilder|*.png;*.jpg|Alle Dateien|*.*"
+            };
+
+            if (dlg.ShowDialog() == true)
+            {
+                using (var fileStream = File.OpenRead(dlg.FileName))
+                    server?.SendImage(fileStream);
+            }
+
         }
     }
 }
