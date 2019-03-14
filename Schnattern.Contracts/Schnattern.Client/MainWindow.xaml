@@ -1,0 +1,36 @@
+﻿<Window x:Class="Schnattern.Client.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Schnattern.Client"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="600">
+    <DockPanel>
+        <Grid DockPanel.Dock="Top" Margin="12">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition />
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Label>Name:</Label>
+            <TextBox Grid.Column="1" Name="usernameTb"/>
+            <Button Grid.Column="2">Login</Button>
+            <Button Grid.Column="3">Logout</Button>
+        </Grid>
+        <Grid DockPanel.Dock="Bottom" Margin="12">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBox Name="textTb"/>
+            <Button Grid.Column="1">Send Text</Button>
+            <Button Grid.Column="2">🤓</Button>
+        </Grid>
+
+        <ListBox DockPanel.Dock="Right" Name="usersLb" Width="160"/>
+        <ListBox Name="chatLb"/>
+    </DockPanel>
+</Window>
